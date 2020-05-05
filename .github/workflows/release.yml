@@ -64,7 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ jobs.pre-release.steps.create_release.outputs.upload_url }}
           asset_path: ./env-generator.${{ matrix.goos }}.tar.gz
           asset_name: env-generator.${{ matrix.goos }}.tar.gz
           asset_content_type: application/tar

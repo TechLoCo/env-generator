@@ -17,7 +17,7 @@ jobs:
         id: go
       - name: set path
         run: |
-        export PATH=$PATH:$(go env GOPATH)/bin
+          export PATH=$PATH:$(go env GOPATH)/bin
       - name: checkout
         uses: actions/checkout@v2
       - name: cache

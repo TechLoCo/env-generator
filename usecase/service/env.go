@@ -1,8 +1,8 @@
 package service
 
 import (
-	"env-generator/model"
-	"env-generator/usecase/repository"
+	"github.com/TechLoCo/env-generator/model"
+	"github.com/TechLoCo/env-generator/usecase/repository"
 )
 
 // Env service interface

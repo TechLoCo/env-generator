@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"env-generator/model"
+	"github.com/TechLoCo/env-generator/model"
 )
 
 // Env interface

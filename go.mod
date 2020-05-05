@@ -1,4 +1,4 @@
-module env-generator
+module github.com/TechLoCo/env-generator
 
 go 1.13
 

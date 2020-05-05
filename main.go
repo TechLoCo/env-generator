@@ -1,9 +1,9 @@
 package main
 
 import (
-	"env-generator/adapter"
-	"env-generator/model"
-	"env-generator/usecase/service"
+	"github.com/TechLoCo/env-generator/adapter"
+	"github.com/TechLoCo/env-generator/model"
+	"github.com/TechLoCo/env-generator/usecase/service"
 	"github.com/urfave/cli"
 	"log"
 	"os"

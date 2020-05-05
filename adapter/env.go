@@ -2,8 +2,9 @@ package adapter
 
 import (
 	"encoding/json"
-	"env-generator/model"
 	"fmt"
+
+	"github.com/TechLoCo/env-generator/model"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"

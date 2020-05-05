@@ -7,8 +7,18 @@ on:
 
 jobs:
   release:
-    name: all
+    name: release
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [mac64, lin64, win64]
+        include:
+          - os: mac64
+            goos: darwin
+          - os: lin64
+            goos: linux
+          - os: win64
+            goos: windows
     steps:
       - name: set up
         uses: actions/setup-go@v1
@@ -27,9 +37,13 @@ jobs:
       - name: make release
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
-          make release
+          make release OS=${goos}
+        env:
+          goos: ${{ matrix.goos }}
       - name: tar
-        run: tar czvf env-generator.tar.gz -C bin .
+        run: tar czvf "env-generator.${goos}.tar.gz" -C bin .
+        env:
+          goos: ${{ matrix.goos }}
       - name: create release
         id: create_release
         uses: actions/create-release@latest
@@ -47,6 +61,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./env-generator.tar.gz
-          asset_name: env-generator.tar.gz
+          asset_path: "./env-generator.${goos}.tar.gz"
+          asset_name: "env-generator.${goos}.tar.gz"
           asset_content_type: application/tar

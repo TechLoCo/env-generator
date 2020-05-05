@@ -17,7 +17,7 @@ func run(args []string) error {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "profile",
-			Value: "default",
+			Value: "",
 		},
 		cli.StringFlag{
 			Name:  "region",

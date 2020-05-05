@@ -15,9 +15,6 @@ jobs:
         with:
           go-version: 1.13
         id: go
-      - name: set path
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
       - name: checkout
         uses: actions/checkout@v2
       - name: cache
@@ -28,7 +25,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
       - name: make release
-        run: make release
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          make release
       - name: tar
         run: tar czvf env-generator.tar.gz -C bin .
       - name: create release

@@ -1,4 +1,4 @@
-name: golang_ci
+name: env-generator ci
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
         env:
           goos: ${{ matrix.goos }}
       - name: tar
-        run: tar czvf "env-generator.${goos}.tar.gz" -C bin .
+        run: tar czvf env-generator.${goos}.tar.gz -C bin .
         env:
           goos: ${{ matrix.goos }}
       - name: upload asset

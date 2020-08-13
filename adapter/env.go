@@ -3,6 +3,8 @@ package adapter
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
+	"strings"
 
 	"github.com/TechLoCo/env-generator/model"
 
@@ -53,7 +55,33 @@ func (e *Env) Load(args model.Args) (model.Env, error) {
 
 // write 標準出力にenvを出力
 func (e *Env) Write(env model.Env) {
+	// prefixごとにまとめる
+	prefixMap := make(map[string]map[string]string)
 	for k, v := range env {
-		fmt.Printf("%s=%s\n", k, v)
+		prefix := strings.Split(k, "_")[0]
+		if valueEnv, ok := prefixMap[prefix]; ok {
+			valueEnv[k] = v
+			prefixMap[prefix] = valueEnv
+		} else {
+			valueEnv := make(map[string]string)
+			valueEnv[k] = v
+			prefixMap[prefix] = valueEnv
+		}
+	}
+
+	// prefixでソートするためにprefixList作成
+	prefixList := make([]string, len(prefixMap))
+	for prefix, _ := range prefixMap {
+		prefixList = append(prefixList, prefix)
+	}
+	sort.Strings(prefixList)
+
+	// 出力
+	for _, prefix := range prefixList {
+		fmt.Printf("# %s\n", prefix)
+		for k, v := range prefixMap[prefix] {
+			fmt.Printf("%s=%s\n", k, v)
+		}
+		fmt.Println()
 	}
 }

@@ -70,8 +70,8 @@ func (e *Env) Write(env model.Env) {
 	}
 
 	// prefixでソートするためにprefixList作成
-	prefixList := make([]string, len(prefixMap))
-	for prefix, _ := range prefixMap {
+	var prefixList []string
+	for prefix := range prefixMap {
 		prefixList = append(prefixList, prefix)
 	}
 	sort.Strings(prefixList)
